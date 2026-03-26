@@ -1,58 +1,18 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+**NAME: ** Jason Fernandez
+**TIME: ** This test took me about 6 hours including setting up.
+##Summary
+I started by downloading Laravel on my system and DBngin for the server. I decided to use PHP and the Laravel framework because I have more familiarity with that framework. After reviewing the assessment, I started by developing the migrations. The Laravel environment had a pre-made user migration so I altered it to fit the specifications of the assessment such as splitting name to first name and last name. Then I created the message migration. I altered the existing user model to fit our specifications. With that complete, I moved on to making the user functions of register and login. In the register function, I started by validating the information with all fields being required. The user email input would also have to be unique to avoid repeated emails. Once validated, it would be created in the database and a return response with the users info, except the password, would be returned. 
+The login function starts by validating the users email and password. I would then look up the user's email and check if it exists in the database. If the user’s email does not exist then we will return an error message. I used the sample code and title and slightly tweaked the message to say the email is invalid. Then the password is hashed and checked to make sure it is the correct password. If the password is incorrect, they get a message saying invalid password with the same sample code and title. Similarly to the register function, a return response with the users info, except the password, are returned. 
+Before moving onto the chat controller, I developed the message model with fillable sender_user_id, receiver_user_id, and message. I developed the listAllUsers function first as it seemed the easiest to create. It validates the requester id and then finds the rest of users except for the requester. The return response is the users. I then created the sendMessage function which starts by validating the sender_user_id, receiver_user_id, and message. Once validated, it is created in the database followed by a return response of a successful message being sent. Lastly, I created the viewMessages function which starts by validating user id’s of user a and user b. Once validated, the database is searched where the sender_user_id and receiver_user_id or userIdA and userIdB and vice versa. Afterwards, the return response returns the messages id, sender id, message, and epoch.
+Testing was done using curl.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+##Suggested improvements:
+Vague error messages
+I altered these to be case specific, either an email issue or password issue
+Chat endpoints don’t have authentication making them accessible to anyone who has the URL
+No use of pagination which would delay the site as the app grows in popularity and overwhelm the user
+View_messages should be limited to 10 most recent
+The view and send messages should be a POST and GET function under a messages endpoint
 
-## About Laravel
-
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
-```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
-```
-
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+##Database
+The SQL dump is under database and titled giftogram_chat.sql
